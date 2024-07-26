@@ -2,7 +2,6 @@
 nav{
     display:flex;
     justify-content:space-between;
-    //border: 1px solid red;
     height: 100px;
     align-items: center;
     a{
@@ -30,59 +29,47 @@ nav{
             img{
                 width: 28px;
             }
-
             span{
                 @include md{
                     display: none;
                 }
-
                 @include sm{
                     display: initial;
                 }
+            }
+            img{
+                width: 28px;
             }
         }
     }
 
     .right{
-        margin-top: 10px; 
-        height: 90%;
-        border-radius: 10%;
         flex: 2;
         display: flex;
         align-items: center;
-        justify-content: flex-end;
-        gap: 25px;
+        justify-content: end;
+        height: 100%;
         background-color: #fcf5f3;
 
-        @include lg{
-          background-color: transparent;
-          margin-left: 30px;
-        }
-        @include sm{
-            height: 50%;
+        @include md{
+            background-color: transparent;
         }
         a{
-            
             padding: 12px 24px;
-            margin: auto; 
-            @include lg{
+            margin: 20px;
+
             .muibtn{
-            height: 40px;        
-            width: 90px;        
-            font-size: 14px;     
-            line-height: 30px;   
-            padding: 0 10px; 
-            margin-left: 20px;  
-           }
+                @include md{
+                    height: 40px;
+                    width: 90px;
+                    line-height: 30px;
+                    font-size: 14px;
+                    padding: 0px 10px;
+                }
             }
         }
-        .register{
-            background-color: rgb(156, 231, 6);
-        }
-
         .menuIcon{
             display: none;
-
             @include sm{
                 display: initial;
             }
