@@ -1,6 +1,6 @@
 import './SearchBar.scss'
 import { useState } from 'react';
-import SearchIcon from '@mui/icons-material/Search';
+//import SearchIcon from '@mui/icons-material/Search';
 const types=["buy", "rent"];
 const SearchBar = () =>{
     const [query, setQuery] = useState({
@@ -29,7 +29,7 @@ const SearchBar = () =>{
                 <input type='number' name="maxPrice"   placeholder='Max Price'/>
 
                 <button>
-                    <img src='./search.png' />
+                    <img src='./search.png' alt=''/>
                 </button>
                 
 

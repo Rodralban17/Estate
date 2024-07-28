@@ -1,19 +1,31 @@
-import logo from './logo.svg';
-import './layout.scss';
-import Navbar from './components/navbar/Navbar'
+import {
+  createBrowserRouter, 
+  RouterProvider,
+} from "react-router-dom";
 import Example from './test';
-import HomePage from './pages/homePage';
+import HomePage from './pages/homepage/homePage';
+import ListPage from "./pages/listPage/ListPage";
+import Layout from "./pages/layout/Layout";
+
 const App = () =>{
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: <Layout/>,
+      children:[
+        {
+          path: "/",
+          element: <HomePage/>
+        },
+        {
+          path: "/list",
+          element: <ListPage/>
+        }
+      ]
+    }
+  ])
   return (
-    <div className='layout'>
-      <div className='navbar'>
-        <Navbar/>
-      </div>
-      
-      <div className='content'>
-      <HomePage/>
-      </div>
-    </div>
+    <RouterProvider router={router}/>
   );
 }
 
