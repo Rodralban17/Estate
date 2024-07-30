@@ -3,18 +3,12 @@ import {Button}  from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
 import IconButton from '@mui/material/IconButton';
 import { useState } from 'react';
-import {
-  FiEdit,
-  FiChevronDown,
-  FiTrash,
-  FiShare,
-  FiPlusSquare,
-} from "react-icons/fi"; 
 import { color, motion } from "framer-motion";
+import { Link } from 'react-router-dom';
 
 const Navbar = () =>{
   const [open, setOpen] = useState(false);
-
+  const user = true;
     return(
      <nav>
         <div className="left">
@@ -30,7 +24,14 @@ const Navbar = () =>{
             <a href=''>Agents</a>
         </div>
         <div className="right">
-        <a href=''><Button variant='outlined'
+        {user ? (<div className='user'>
+          <img src='' alt=''/>
+          <span>Temdie Alban</span>
+          <Link to="/profile" className='profile'>
+            <div className="notification">3</div>
+            <span>Profile</span>
+          </Link>
+        </div>) : (<><a href=''><Button variant='outlined'
         className='muibtn'
         sx={{
             color: 'rgb(156, 231, 6)',
@@ -51,6 +52,7 @@ const Navbar = () =>{
           backgroundColor: 'rgb(156, 231, 6)'
           }}}> Sign up
             </Button></a>
+            </>)}
 
         <div className="menuIcon"  >
         <IconButton  onClick={() => setOpen((pv) => !pv)} style={{ color: "rgb(156, 231, 6)", marginLeft: "50px"}}>
