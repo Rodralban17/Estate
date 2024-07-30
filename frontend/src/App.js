@@ -6,6 +6,7 @@ import Example from './test';
 import HomePage from './pages/homepage/homePage';
 import ListPage from "./pages/listPage/ListPage";
 import Layout from "./pages/layout/Layout";
+import SinglePage from "./pages/singlepage/SinglePage";
 
 const App = () =>{
   const router = createBrowserRouter([
@@ -20,7 +21,11 @@ const App = () =>{
         {
           path: "/list",
           element: <ListPage/>
-        }
+        },
+        {
+          path: "/:id",
+          element: <SinglePage/>
+        },
       ]
     }
   ])
