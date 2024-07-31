@@ -3,6 +3,7 @@ import { TextField, Button } from '@mui/material'
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useController, useForm } from "react-hook-form";
+import { Link } from 'react-router-dom';
 const Register = () =>{
     const schema = yup.object().shape({
         username: yup.string().matches(/^[a-zA-Z0-9]+$/, 'Avoid using special characters').required("User name is required"),
@@ -23,11 +24,12 @@ const Register = () =>{
         <div className='register'>
             <div className="formContainer">
                 <form onSubmit={handleSubmit(onSubmitHandler)}> 
-                <TextField id="username" label="User name" variant="outlined" {...register('username')} error={!!errors.username} helperText={errors.username?.message} /><br></br><br></br>
-                <TextField id="email" label="Email" variant="outlined"  {...register('email')} error={!!errors.email} helperText={errors.email?.message}/><br></br><br></br>
-                <TextField id="phonenumber" label="Phone Number" variant="outlined" {...register('phonenumber')} error={!!errors.phonenumber} helperText={errors.phonenumber?.message} /><br></br>
-                <TextField id="password" label="password" type="password" variant="outlined" style={{ marginTop: '20px' }} {...register('password')} error={!!errors.password} helperText={errors.password?.message}/><br></br>
+                <TextField id="username" label="User name" variant="outlined" {...register('username')} error={!!errors.username} helperText={errors.username?.message} />
+                <TextField id="email" label="Email" variant="outlined"  {...register('email')} error={!!errors.email} helperText={errors.email?.message}/>
+                <TextField id="phonenumber" label="Phone Number" variant="outlined" {...register('phonenumber')} error={!!errors.phonenumber} helperText={errors.phonenumber?.message} />
+                <TextField id="password" label="password" type="password" variant="outlined" style={{ marginTop: '20px' }} {...register('password')} error={!!errors.password} helperText={errors.password?.message}/>
                 <Button variant="contained" style={{ marginTop: '20px' }} type="submit">Submit</Button>
+                <Link to="/login">Do you have an account?</Link>
                 </form>
             </div>
 
