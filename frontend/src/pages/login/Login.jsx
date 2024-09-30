@@ -5,13 +5,15 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useController, useForm } from "react-hook-form";
 import { Link, useNavigate } from 'react-router-dom';
 import apiRequest from '../../lib/apiRequest';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { AuthContext } from '../../context/AuthContext';
 const Login = () =>{
     const [error, setError] = useState()
     const [isLoading, setIsLoading] = useState(false)
     const navigate = useNavigate()
+    const {updateUser} = useContext(AuthContext)
     const schema = yup.object().shape({
         username: yup.string().required("User name is required").matches(/^[a-zA-Z0-9]+$/, 'Avoid using special characters'),
         password: yup.string().required("Password is required").matches(/^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+$/),
@@ -26,7 +28,7 @@ const Login = () =>{
             const res = await apiRequest.post("/auth/login", {
                 username,password
             })
-            localStorage.setItem('user', JSON.stringify(res.data))
+            updateUser(res.data)
             navigate("/")
         }catch(err){
             console.log(err)

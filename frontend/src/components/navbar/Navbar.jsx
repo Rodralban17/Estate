@@ -2,13 +2,15 @@ import './Navbar.scss';
 import {Button}  from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
 import IconButton from '@mui/material/IconButton';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { color, motion } from "framer-motion";
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
 
 const Navbar = () =>{
   const [open, setOpen] = useState(false);
-  const user = false;
+  const {currentUser} = useContext(AuthContext)
+  
     return(
      <nav>
         <div className="left">
@@ -24,9 +26,9 @@ const Navbar = () =>{
             <a href=''>Agents</a>
         </div>
         <div className="right">
-        {user ? (<div className='user'>
-          <img src='' alt=''/>
-          <span>Temdie Alban</span>
+        {currentUser ? (<div className='user'>
+          <img src={currentUser.avatar || "/avatar.png"} alt=''/>
+          <span>{currentUser.username }</span>
           <Link to="/profile" className='profile'>
             <div className="notification">3</div>
             <span>Profile</span>
