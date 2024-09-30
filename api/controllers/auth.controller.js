@@ -16,9 +16,22 @@ export const register = async (req,res)=>{
                 password: hashedPassword,
             }
         })
+
         res.status(201).json({message: "User created successfully"})
     }catch(err){
         console.log(err)
+
+          // Handle specific Prisma error codes
+          if (err.code === 'P2002') {
+            // Unique constraint failure
+            if (err.meta.target.includes('email')) {
+                return res.status(409).json({ message: "Email already exists!" });
+            }
+            if (err.meta.target.includes('username')) {
+               return res.status(409).json({ message: "Username already exists!" });
+            }  
+        }
+
         res.status(500).json({message: "Failed to create user!"})
     }
 
@@ -43,13 +56,16 @@ export const login = async (req,res)=>{
         const age = 1000 * 60 * 60 * 24 * 7 //ms,s,m,h,d gives one week
 
         const token = jwt.sign({
-            id: user.id
+            id: user.id,
+            isAdmin: false,
         }, process.env.JWT_SECRET_KEY, {expiresIn: age})
 
-        res.cookie("token", token,{
+        const {password: userPassword, ...userInfo} = user
+
+        res.cookie("token", token,{ 
             httpOnly: true,
             maxAge: age,
-        }).status(200).json({message: "Login Successful"})
+        }).status(200).json(userInfo)
 
     }catch(err){
         console.log(err)
