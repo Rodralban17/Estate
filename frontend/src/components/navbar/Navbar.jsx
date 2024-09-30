@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 
 const Navbar = () =>{
   const [open, setOpen] = useState(false);
-  const user = true;
+  const user = false;
     return(
      <nav>
         <div className="left">
@@ -31,7 +31,7 @@ const Navbar = () =>{
             <div className="notification">3</div>
             <span>Profile</span>
           </Link>
-        </div>) : (<><a href=''><Button variant='outlined'
+        </div>) : (<><a href='/login'><Button variant='outlined'
         className='muibtn'
         sx={{
             color: 'rgb(156, 231, 6)',
@@ -44,7 +44,7 @@ const Navbar = () =>{
         }}}
         >Sign in</Button></a>
 
-        <a href='' ><Button variant="contained"
+        <a href='/register' ><Button variant="contained"
         className='muibtn'
         sx={{
           backgroundColor: 'rgb(156, 231, 6)', 
