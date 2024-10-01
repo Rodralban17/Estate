@@ -13,10 +13,10 @@ app.use(express.json()) //allow our app to use json formating
 app.use(cookieParser())
 
 app.use("/api/posts", postRoute)
-app.use("/api/user", userRoute)
+app.use("/api/users", userRoute)
 app.use('/api/auth', authRoute)
 app.use('/api/test', testRoute)
 
 app.listen(8800, ()=>{
-    console.log("Server is running!!")
+    console.log("Server is running!!") 
 })
