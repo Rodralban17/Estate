@@ -53,6 +53,16 @@ export const updateUser = async (req, res) => {
     res.status(200).json(rest);
   } catch (err) {
     console.log(err);
+    // Handle specific Prisma error codes
+    if (err.code === 'P2002') {
+        // Unique constraint failure
+        if (err.meta.target.includes('email')) {
+            return res.status(409).json({ message: "Email already exists!" });
+        }
+        if (err.meta.target.includes('username')) {
+           return res.status(409).json({ message: "Username already exists!" });
+        }  
+    }
     res.status(500).json({ message: "Failed to update users!" });
   }
 };
