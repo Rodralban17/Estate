@@ -32,7 +32,7 @@ const Register = () =>{
         const res = await apiRequest.post("/auth/register",{
             username, email, phonenumber, password            
         })
-       
+        
         navigate("/login")
         }catch(err){
             console.log(err)
@@ -55,7 +55,7 @@ const Register = () =>{
                 <TextField id="email" label="Email" variant="outlined"  {...register('email')} error={!!errors.email} helperText={errors.email?.message}/>
                 <TextField id="phonenumber" label="Phone Number" variant="outlined" {...register('phonenumber')} error={!!errors.phonenumber} helperText={errors.phonenumber?.message} />
                 <TextField id="password" label="password" type="password" variant="outlined" style={{ marginTop: '20px' }} {...register('password')} error={!!errors.password} helperText={errors.password?.message}/>
-                <Button disabled={isLoading.toString()} variant="contained" style={{ marginTop: '20px' }} type="submit">Submit</Button>
+                <Button disabled={isLoading} variant="contained" style={{ marginTop: '20px' }} type="submit">Submit</Button>
                 <Link to="/login">Do you have an account?</Link>
                 </form>
             </div>
