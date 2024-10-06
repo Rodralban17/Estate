@@ -11,9 +11,7 @@ import ProfilePage from "./pages/profilePage/ProfilePage";
 import Register from "./pages/register/Register";
 import Login from "./pages/login/Login";
 import ProfileUpdatePage from "./pages/profileUpdatePage/ProfileUpdatePage";
-import NewPostPage from "./pages/newPostPage/NewPostPage";
 import { singlePageLoader } from "./lib/loaders";
-
 const App = () =>{
   const router = createBrowserRouter([
     {
