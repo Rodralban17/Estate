@@ -11,6 +11,8 @@ import ProfilePage from "./pages/profilePage/ProfilePage";
 import Register from "./pages/register/Register";
 import Login from "./pages/login/Login";
 import ProfileUpdatePage from "./pages/profileUpdatePage/ProfileUpdatePage";
+import NewPostPage from "./pages/newPostPage/NewPostPage";
+import { singlePageLoader } from "./lib/loaders";
 
 const App = () =>{
   const router = createBrowserRouter([
@@ -28,7 +30,8 @@ const App = () =>{
         },
         {
           path: "/:id",
-          element: <SinglePage/>
+          element: <SinglePage/>,
+          loader: singlePageLoader
         },
         {
           path: "/register",
@@ -51,6 +54,10 @@ const App = () =>{
         {
           path: "/profile/update",
           element: <ProfileUpdatePage/>
+        },
+        {
+          path: "/profile/newpost",
+          element: <NewPostPage/>
         }
       ]
     }

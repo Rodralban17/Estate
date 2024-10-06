@@ -37,7 +37,9 @@ const ProfilePage = () =>{
 
                     <div className="title">
                         <h1>My List</h1>
+                        <Link to="/profile/newpost">
                         <button>Create new Post</button>
+                        </Link>
                     </div>
                     <List/>
 
