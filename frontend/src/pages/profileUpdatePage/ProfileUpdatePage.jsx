@@ -13,7 +13,7 @@ import UploadWidget from "../../components/uploadWidget/UploadWidget"
 const ProfileUpdatePage=()=>{
     const [isLoading, setIsLoading] = useState(false)
     const {currentUser, updateUser} = useContext(AuthContext)
-    const [avatar, setAvatar] = useState(currentUser.avatar)
+    const [avatar, setAvatar] = useState([])
     const [error,setError] = useState("")
     const navigate = useNavigate()
     const schema = yup.object().shape({
@@ -43,7 +43,7 @@ const ProfileUpdatePage=()=>{
         //console.log(username)
         try{
             const res = await apiRequest.put(`/users/${currentUser.id}`, {
-                username,email,phonenumber,password,avatar
+                username,email,phonenumber,password,avatar:avatar[0]
             })
             updateUser(res.data)
             toast.success("Account updated successfuly!", {
@@ -75,14 +75,14 @@ const ProfileUpdatePage=()=>{
         </div>
         <ToastContainer/>
         <div className="sideContainer">
-          <img src={avatar || "/avatar.png"} alt="" className="avatar" />
+          <img src={avatar[0] || currentUser.avatar || "/avatar.png"} alt="" className="avatar" />
           <UploadWidget uwConfig={{
             cloudName: "alban",
             uploadPreset: "estate",
             multiple: false,
             maxImageFileSize: 2000000,
             folder:"avatars"
-          }} setAvatar={setAvatar}/>
+          }} setState={setAvatar}/>
         </div>
       </div>
     )
