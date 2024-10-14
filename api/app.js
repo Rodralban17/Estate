@@ -1,3 +1,4 @@
+import dotenv from 'dotenv';
 import express from "express"
 import cors from "cors"
 import cookieParser from "cookie-parser"
@@ -5,7 +6,7 @@ import postRoute from "./routes/post.route.js"
 import authRoute from "./routes/auth.route.js"
 import userRoute from "./routes/user.route.js"
 import testRoute from "./routes/test.route.js"
-
+dotenv.config()
 const app = express()
 
 app.use(cors({origin: "http://localhost:3000", credentials: true}))

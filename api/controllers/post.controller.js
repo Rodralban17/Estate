@@ -12,8 +12,8 @@ export const getPosts = async (req, res) => {
         property: query.property || undefined,
         bedroom: parseInt(query.bedroom) || undefined,
         price: {
-          gte: parseInt(query.minPrice) || undefined,
-          lte: parseInt(query.maxPrice) || undefined,
+          gte: parseInt(query.minPrice) || 0,
+          lte: parseInt(query.maxPrice) || 1000000000,
         },
       },
     });
@@ -41,26 +41,33 @@ export const getPost = async (req, res) => {
       },
     });
 
+    if (!post) {
+      return res.status(404).json({ message: "Post not found" });
+    }
+
     const token = req.cookies?.token;
+    let isSaved = false; // Default value for isSaved
 
     if (token) {
-      jwt.verify(token, process.env.JWT_SECRET_KEY, async (err, payload) => {
-        if (!err) {
-          const saved = await prisma.savedPost.findUnique({
-            where: {
-              userId_postId: {
-                postId: id,
-                userId: payload.id,
-              },
+      try {
+        const payload = jwt.verify(token, process.env.JWT_SECRET_KEY);
+        const saved = await prisma.savedPost.findUnique({
+          where: {
+            userId_postId: {
+              postId: id,
+              userId: payload.id,
             },
-          });
-          res.status(200).json({ ...post, isSaved: saved ? true : false });
-        }
-      });
+          },
+        });
+        isSaved = !!saved; 
+      } catch (err) {
+        console.error('Token verification failed:', err);
+      }
     }
-    res.status(200).json({ ...post, isSaved: false });
+
+    res.status(200).json({ ...post, isSaved });
   } catch (err) {
-    console.log(err);
+    console.error(err);
     res.status(500).json({ message: "Failed to get post" });
   }
 };
