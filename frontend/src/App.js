@@ -10,8 +10,9 @@ import SinglePage from "./pages/singlepage/SinglePage";
 import ProfilePage from "./pages/profilePage/ProfilePage";
 import Register from "./pages/register/Register";
 import Login from "./pages/login/Login";
+import NewPostPage from "./pages/newPostPage/NewPostPage"
 import ProfileUpdatePage from "./pages/profileUpdatePage/ProfileUpdatePage";
-import { singlePageLoader } from "./lib/loaders";
+import { listPageLoader, singlePageLoader } from "./lib/loaders";
 const App = () =>{
   const router = createBrowserRouter([
     {
@@ -24,7 +25,8 @@ const App = () =>{
         },
         {
           path: "/list",
-          element: <ListPage/>
+          element: <ListPage/>,
+          loader: listPageLoader
         },
         {
           path: "/:id",

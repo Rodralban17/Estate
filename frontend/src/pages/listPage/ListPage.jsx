@@ -3,20 +3,22 @@ import './ListPage.scss';
 import { listData } from '../../lib/dummy';
 import Card from '../../components/card/Card';
 import Map from '../../components/map/Map';
+import { useLoaderData } from 'react-router-dom';
 const ListPage = () =>{
-    const data = listData;
+    const posts = useLoaderData()
+    console.log(posts)
     return(
         <div className="listPage">
             <div className="listContainer">
                 <div className="wrapper">
                     <Filter/>
-                    {data.map(item=>(
+                    {posts.map(item=>(
                         <Card key={item.id} item={item} />
                     ))}
                 </div>
-            </div> 
+            </div>  
             <div className="mapContainer">
-                <Map items={data}/>
+                <Map items={posts}/>
             </div>
         </div>
     )

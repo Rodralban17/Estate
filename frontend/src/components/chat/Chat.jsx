@@ -10,7 +10,7 @@ const Chat = () =>{
                 <h1>Messages</h1>
                 <div className="message">
                     <img src='' alt=''/>
-                    <span>John</span>
+                    <span>Paul</span>
                     <p>Reply to me please</p>
                 </div>
 
