@@ -112,7 +112,7 @@ export const savePost = async (req, res) => {
         data: {
           userId: tokenUserId,
           postId,
-        },
+        }, 
       });
       res.status(200).json({ message: "Post saved" });
     }
@@ -136,9 +136,20 @@ export const profilePosts = async (req, res) => {
     });
 
     const savedPosts = saved.map((item) => item.post);
-    res.status(200).json({ userPosts, savedPosts });
+    savedPosts.forEach(element => {
+      element.isSaved= true
+    });
+    const savedPostIds = new Set(saved.map(item => item.post.id));
+
+    const updatedUserPosts = userPosts.map(post => ({
+      ...post, 
+      isSaved: savedPostIds.has(post.id), 
+    }));
+  
+    res.status(200).json({ userPosts: updatedUserPosts, savedPosts: savedPosts });
+    
   } catch (err) {
-    console.log(err);
+    console.log(err); 
     res.status(500).json({ message: "Failed to get profile posts!" });
   }
 };
