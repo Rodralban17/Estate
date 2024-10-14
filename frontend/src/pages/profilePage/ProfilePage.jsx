@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLoaderData, useNavigate } from 'react-router-dom';
 import Chat from '../../components/chat/Chat';
 import List from '../../components/list/List';
 import apiRequest from '../../lib/apiRequest';
@@ -7,6 +7,8 @@ import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 
 const ProfilePage = () =>{
+    const post = useLoaderData()
+    console.log(post.posts.data)
     const navigate = useNavigate()
     const {currentUser, updateUser} = useContext(AuthContext)
     const handleLogout=async()=>{
@@ -41,12 +43,12 @@ const ProfilePage = () =>{
                         <button>Create new Post</button>
                         </Link>
                     </div>
-                    <List/>
+                    <List post={post.posts.data.userPosts}/>
 
                     <div className="title">
                         <h1>Saved List</h1>
                     </div>
-                    <List/>
+                    <List post={post.posts.data.savedPosts}/>
                 </div>
             </div>
 
