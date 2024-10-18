@@ -25,10 +25,10 @@ export const register = async (req,res)=>{
           if (err.code === 'P2002') {
             // Unique constraint failure
             if (err.meta.target.includes('email')) {
-                return res.status(409).json({ message: "Email already exists!" });
+                return res.status(400).json({ message: "Email already exists!" });
             }
             if (err.meta.target.includes('username')) {
-               return res.status(409).json({ message: "Username already exists!" });
+               return res.status(400).json({ message: "Username already exists!" });
             }  
         }
 
