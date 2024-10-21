@@ -7,8 +7,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 
 const ProfilePage = () =>{
-    const post = useLoaderData()
-    console.log(post.posts.data)
+    const data = useLoaderData()
     const navigate = useNavigate()
     const {currentUser, updateUser} = useContext(AuthContext)
     const handleLogout=async()=>{
@@ -43,18 +42,18 @@ const ProfilePage = () =>{
                         <button>Create new Post</button>
                         </Link>
                     </div>
-                    <List post={post.posts.data.userPosts}/>
+                    <List post={data.posts.data.userPosts}/>
 
                     <div className="title">
                         <h1>Saved List</h1>
                     </div>
-                    <List post={post.posts.data.savedPosts}/>
+                    <List post={data.posts.data.savedPosts}/>
                 </div>
             </div>
 
             <div className="chatContainer">
                 <div className="wrapper">
-                    <Chat/>
+                    <Chat chats={data.chats.data}/>
                 </div>
             </div>
         </div>

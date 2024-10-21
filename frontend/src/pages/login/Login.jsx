@@ -9,6 +9,7 @@ import { useContext, useState } from 'react';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from '../../context/AuthContext';
+import LoaderComp from '../homepage/loader';
 const Login = () =>{
     const [error, setError] = useState()
     const [isLoading, setIsLoading] = useState(false)
