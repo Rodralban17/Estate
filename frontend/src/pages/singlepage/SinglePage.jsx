@@ -24,6 +24,23 @@ const SinglePage = () =>{
             setSave((prev) => !prev)
         }
     }
+
+    const handleCreateChat = async()=>{
+        try{
+            await apiRequest.post("/chats",{
+                receiverId: post.user.id
+            })
+            navigate("/profile")
+        }catch(err){
+            console.log(err)
+            if (err.response && err.response.status === 400 && err.response.data.message === "Chat already exists.") {
+                navigate("/profile");
+            } else {
+                // Handle other errors (optional)
+                //alert("An error occurred while creating the chat.");
+            }
+        }
+    }
     return(
         <div className="singlepage">
 
@@ -147,9 +164,9 @@ const SinglePage = () =>{
                             <Map items={[post]}/>
                         </div>
 
-                        <div className="buttons">
-                            <button>
-                                <img src='/chat.png' alt=''/>
+                        <div className="buttons" >
+                            <button onClick={handleCreateChat}>
+                                <img src='/chat.png' alt='' />
                                 Send a Message
                             </button>
 
